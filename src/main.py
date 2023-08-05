@@ -55,7 +55,7 @@ def run_app(app_name: str):
     uvicorn.run(
         app=app_name,
         host="0.0.0.0",
-        port=os.getenv("PORT", default=5555),
+        port=(int(os.getenv("PORT", default=5555))),
         workers=5,
         log_level="debug",
         reload=True,
