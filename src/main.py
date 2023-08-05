@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
+from dotenv import dotenv_values
+
 from .modules.users.users_route import user_router
 from .modules.users.user_login_route import auth_router
 from .modules.attendance.attendance_route import attendance_router
@@ -11,6 +13,10 @@ from .modules.employee.employee_route import employee_router
 
 SECRET_KEY = "mY_JwT_s3CRe7_K3y"
 ALGORITHM = "HS256"
+
+ENV_DATA = dotenv_values()
+
+PORT = ENV_DATA.get("PORT") if ENV_DATA is not None else "5000"
 
 app = FastAPI()
 
@@ -52,9 +58,8 @@ async def root():
 def run_app(app_name: str):
     uvicorn.run(
         app=app_name,
-        # host="0.0.0.0",
-        host="localhost",
-        port=5555,
+        host="0.0.0.0",
+        port=PORT,
         workers=5,
         log_level="debug",
         reload=True,
