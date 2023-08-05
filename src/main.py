@@ -22,7 +22,7 @@ origins = [
     "http://149.51.37.178:3000",
     "http://149.51.37.178:3001",
     "https://attendance-management-system-frontend-skripsi-wildan.vercel.app",
-    "https://attendance-management-system-frontend-dp4l01bo2-skripsi-wildan.vercel.app"
+    "https://attendance-management-system-frontend-dp4l01bo2-skripsi-wildan.vercel.app",
 ]
 
 app.add_middleware(
@@ -42,10 +42,9 @@ app.include_router(role_router)
 app.include_router(employee_router)
 
 
-@app.get('/')
+@app.get("/")
 async def root():
-
-    resp = {'message': ''' This is Wildan's Skripsi API '''}
+    resp = {"message": """ This is Wildan's Skripsi API """}
 
     return resp
 
@@ -53,9 +52,10 @@ async def root():
 def run_app(app_name: str):
     uvicorn.run(
         app=app_name,
-        host="0.0.0.0",
+        # host="0.0.0.0",
+        host="localhost",
         port=5555,
         workers=5,
         log_level="debug",
-        reload=True
+        reload=True,
     )
